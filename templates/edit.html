@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h>{% block title %}Edit {{ post['title'] }}{% endblock %}</h>
+    <form method="post">
+        <label for="title">Title</label>
+        <br>
+        <input type="text" name="title" placeholder="Enter post title" value="{{ request.form['title'] or post['title'] }}">
+        <br>
+        <label for="content">Content</label>
+        <br>
+        <textarea
+                name="content"
+                placeholder="post content"
+                rows="15"
+                cols="60"
+        >{{ request.form['content'] or post['content'] }}</textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+{% endblock %}

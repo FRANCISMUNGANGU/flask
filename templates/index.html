@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {# title#}
+    <h1>{% block title %}Posts{% endblock %}</h1>
+{#    we use the data that was rendered together with this template from the view logic #}
+{# inside here as per logic in app.py i have access to the posts dictionary #}
+    {% for x in posts %}
+{#          my loop should create same interface for my different posts #}
+        <div class="posts">
+            <p>{{ x["created"] }}</p>
+            <p>{{ x["title"] }}</p>
+            <p>{{ x["content"] }}</p>
+{#            edit button#}
+            <a href="{{ url_for("edit", id=x["id"]) }}">Edit post</a>
+            <a href="{{ url_for("delete", id=x["id"]) }}">Delete post</a>
+        </div>
+    {% endfor %}
+{% endblock %}
