@@ -28,13 +28,13 @@ def get_db_connection():
 
 def get_post(post_id):
     conn = get_db_connection()
-    post = conn.execute("SELECT * FROM posts WHERE id = ?", (post_id,)).fetchone()
+    posts = conn.execute("SELECT * FROM posts WHERE id = ?", (post_id,)).fetchone()
     conn.close()
    # validate the post id exists
-    if post is None:
+    if posts is None:
         abort(404)
    # when post is found
-    return post
+    return posts
 
 # DEFINE ROUTES FOR DISPLAYING POSTS
 # fetchall() returns our rows from sql as a python dictionary
@@ -46,7 +46,7 @@ def index():
     return render_template('index.html', posts=posts)
 
 # posting data
-# GET requests are used tp retrieve data from a server/POST is used to post data to a specific route
+# GET requests are used tO retrieve data from a server/POST is used to post data to a specific route
 @app.route('/create/', methods=('GET', 'POST'))
 def create():
     if request.method == "POST":
